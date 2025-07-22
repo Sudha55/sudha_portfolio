@@ -1,0 +1,12 @@
+# Node and server files (not needed for static site)
+node_modules/
+server.js
+uploads/
+blogs.json
+.env
+.DS_Store
+*.log
+# VSCode
+.vscode/
+# OS junk
+Thumbs.db

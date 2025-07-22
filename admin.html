@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Blog Upload</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">SP Admin</div>
+    <ul>
+      <li><a href="index.html">Main Site</a></li>
+    </ul>
+  </nav>
+  <section id="admin-upload">
+    <h2>Upload Blog or Case Study</h2>
+    <form id="blog-upload-form" enctype="multipart/form-data">
+      <input type="text" name="title" placeholder="Title" required>
+      <input type="text" name="description" placeholder="Short Description" required>
+      <input type="file" name="blogFile" accept=".pdf,.doc,.docx,.txt" required>
+      <button type="submit">Upload</button>
+    </form>
+    <div id="upload-status"></div>
+  </section>
+  <script>
+    const blogForm = document.getElementById('blog-upload-form');
+    const statusDiv = document.getElementById('upload-status');
+    blogForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(blogForm);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+      if (res.ok) {
+        blogForm.reset();
+        statusDiv.textContent = 'Upload successful!';
+      } else {
+        statusDiv.textContent = 'Upload failed!';
+      }
+    });
+  </script>
+</body>
+</html>
